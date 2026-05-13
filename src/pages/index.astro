@@ -113,7 +113,7 @@ const posts = (await getCollection('blog'))
 		border-bottom: 1px solid rgb(var(--gray-light));
 	}
 	.tagline {
-		font-size: clamp(2.5rem, 6vw, 4.5rem);
+		font-size: clamp(2rem, 8vw, 4.5rem);
 		line-height: 1.05;
 		letter-spacing: -0.03em;
 		color: rgb(var(--black));
@@ -264,15 +264,19 @@ const posts = (await getCollection('blog'))
 			grid-column: 1 / -1;
 		}
 	}
-	@media (max-width: 600px) {
+	@media (max-width: 640px) {
 		main {
-			padding: 0 1em;
+			padding: 0 1.25em;
 		}
 		.hero {
-			padding: 3em 0 2.5em;
+			padding: 2.5em 0 2em;
+		}
+		.intro {
+			font-size: 1rem;
 		}
 		.post-list {
 			grid-template-columns: 1fr;
+			gap: 2.5rem;
 		}
 		.post-item.featured {
 			grid-column: 1;

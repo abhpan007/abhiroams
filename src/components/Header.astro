@@ -6,6 +6,11 @@ import HeaderLink from './HeaderLink.astro';
 <header>
 	<nav>
 		<a href="/" class="site-title">{SITE_TITLE}</a>
+		<button class="menu-btn" aria-label="Toggle menu" aria-expanded="false">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
 		<div class="nav-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
@@ -14,12 +19,34 @@ import HeaderLink from './HeaderLink.astro';
 		</div>
 	</nav>
 </header>
+
+<script>
+	const btn = document.querySelector('.menu-btn') as HTMLButtonElement;
+	const navLinks = document.querySelector('.nav-links') as HTMLElement;
+
+	btn?.addEventListener('click', () => {
+		const isOpen = navLinks.classList.toggle('open');
+		btn.setAttribute('aria-expanded', String(isOpen));
+		btn.classList.toggle('open', isOpen);
+	});
+
+	navLinks?.querySelectorAll('a').forEach((link) => {
+		link.addEventListener('click', () => {
+			navLinks.classList.remove('open');
+			btn.setAttribute('aria-expanded', 'false');
+			btn.classList.remove('open');
+		});
+	});
+</script>
+
 <style>
 	header {
+		position: relative;
 		margin: 0;
 		padding: 0 2em;
 		background: #fff;
 		border-bottom: 1px solid rgb(var(--gray-light));
+		z-index: 100;
 	}
 	nav {
 		display: flex;
@@ -49,6 +76,7 @@ import HeaderLink from './HeaderLink.astro';
 		font-size: 0.95em;
 		border-bottom: 2px solid transparent;
 		transition: color 0.15s ease, border-color 0.15s ease;
+		text-decoration: none;
 	}
 	.nav-links a:hover {
 		color: rgb(var(--black));
@@ -59,13 +87,75 @@ import HeaderLink from './HeaderLink.astro';
 		font-weight: 600;
 		text-decoration: none;
 	}
-	@media (max-width: 600px) {
+
+	/* Hamburger button — hidden on desktop */
+	.menu-btn {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		gap: 5px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0.5em;
+		margin-right: -0.5em;
+	}
+	.menu-btn span {
+		display: block;
+		width: 22px;
+		height: 2px;
+		background: rgb(var(--black));
+		border-radius: 2px;
+		transition: transform 0.22s ease, opacity 0.22s ease;
+	}
+	/* Animate to X when open */
+	.menu-btn.open span:nth-child(1) {
+		transform: translateY(7px) rotate(45deg);
+	}
+	.menu-btn.open span:nth-child(2) {
+		opacity: 0;
+		transform: scaleX(0);
+	}
+	.menu-btn.open span:nth-child(3) {
+		transform: translateY(-7px) rotate(-45deg);
+	}
+
+	@media (max-width: 640px) {
 		header {
-			padding: 0 1em;
+			padding: 0 1.25em;
+		}
+
+		.menu-btn {
+			display: flex;
+		}
+
+		.nav-links {
+			display: none;
+			position: absolute;
+			top: 64px;
+			left: 0;
+			right: 0;
+			flex-direction: column;
+			background: #fff;
+			border-bottom: 1px solid rgb(var(--gray-light));
+			padding: 0.5em 1.25em 1em;
+			gap: 0;
+		}
+		.nav-links.open {
+			display: flex;
 		}
 		.nav-links a {
-			padding: 0.4em 0.5em;
-			font-size: 0.85em;
+			padding: 0.9em 0;
+			font-size: 1rem;
+			border-bottom: 1px solid rgb(var(--gray-light));
+			border-right: none;
+		}
+		.nav-links a:last-child {
+			border-bottom: none;
+		}
+		.nav-links a.active {
+			border-bottom-color: rgb(var(--gray-light));
+			color: var(--accent);
 		}
 	}
 </style>
