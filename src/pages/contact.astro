@@ -1,0 +1,63 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Contact — ${SITE_TITLE}`} description="Get in touch with Abhi Pandya" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="prose">
+				<h1>Contact</h1>
+				<p>
+					Have a tip, a trail recommendation, or just want to say hello? I'd love to hear from you.
+				</p>
+				<p>
+					The best way to reach me is by email at{' '}
+					<a href="mailto:abhpan007@gmail.com">abhpan007@gmail.com</a>.
+				</p>
+				<p>
+					You can also find me on{' '}
+					<a href="https://instagram.com/abhiroams" target="_blank" rel="noopener noreferrer">Instagram</a>{' '}
+					and{' '}
+					<a href="https://youtube.com/@abhipandya55" target="_blank" rel="noopener noreferrer">YouTube</a>.
+				</p>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+<style>
+	main {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 0 2em;
+	}
+	.prose {
+		max-width: 600px;
+		padding: 4em 0;
+	}
+	.prose h1 {
+		font-size: 2.5rem;
+		letter-spacing: -0.03em;
+		margin-bottom: 1.5rem;
+	}
+	.prose p {
+		color: rgb(var(--gray-dark));
+		margin-bottom: 1rem;
+	}
+	@media (max-width: 600px) {
+		main {
+			padding: 0 1em;
+		}
+		.prose {
+			padding: 2.5em 0;
+		}
+	}
+</style>

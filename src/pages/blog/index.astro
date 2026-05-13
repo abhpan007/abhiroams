@@ -10,105 +10,255 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const [featured, ...rest] = posts;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
+		<BaseHead title={`Blog — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
+			<div class="blog-header fade-in">
+				<h1>Blog</h1>
+				<p class="post-count">{posts.length} {posts.length === 1 ? 'post' : 'posts'}</p>
+			</div>
+
+			{featured && (
+				<article class="card card-featured fade-in">
+					<a href={`/blog/${featured.id}/`} class="card-link">
+						{featured.data.heroImage ? (
+							<div class="card-image">
+								<Image width={1200} height={600} src={featured.data.heroImage} alt={featured.data.title} />
+							</div>
+						) : (
+							<div class="card-image card-image-placeholder">
+								<span>{featured.data.title.charAt(0)}</span>
+							</div>
+						)}
+						<div class="card-body">
+							<p class="card-date"><FormattedDate date={featured.data.pubDate} /></p>
+							<h2 class="card-title">{featured.data.title}</h2>
+							{featured.data.description && (
+								<p class="card-desc">{featured.data.description}</p>
+							)}
+							<span class="card-read">Read &rarr;</span>
+						</div>
+					</a>
+				</article>
+			)}
+
+			{rest.length > 0 && (
+				<div class="post-grid">
+					{rest.map((post) => (
+						<article class="card fade-in">
+							<a href={`/blog/${post.id}/`} class="card-link">
+								{post.data.heroImage ? (
+									<div class="card-image">
+										<Image width={720} height={480} src={post.data.heroImage} alt={post.data.title} />
+									</div>
+								) : (
+									<div class="card-image card-image-placeholder">
+										<span>{post.data.title.charAt(0)}</span>
+									</div>
+								)}
+								<div class="card-body">
+									<p class="card-date"><FormattedDate date={post.data.pubDate} /></p>
+									<h2 class="card-title">{post.data.title}</h2>
+									{post.data.description && (
+										<p class="card-desc">{post.data.description}</p>
 									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
+									<span class="card-read">Read &rarr;</span>
+								</div>
+							</a>
+						</article>
+					))}
+				</div>
+			)}
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<script>
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+					observer.unobserve(entry.target);
+				}
+			});
+		},
+		{ threshold: 0.08 },
+	);
+	document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+</script>
+
+<style>
+	main {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 0 2em 6em;
+	}
+
+	/* Fade-in scroll animation */
+	.fade-in {
+		opacity: 0;
+		transform: translateY(32px);
+		transition:
+			opacity 0.65s ease,
+			transform 0.65s ease;
+	}
+	.fade-in.visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	/* Blog header */
+	.blog-header {
+		padding: 4em 0 3em;
+		border-bottom: 1px solid rgb(var(--gray-light));
+		margin-bottom: 3.5em;
+	}
+	.blog-header h1 {
+		font-size: 3rem;
+		letter-spacing: -0.04em;
+		margin: 0 0 0.25em;
+		line-height: 1;
+	}
+	.post-count {
+		font-size: 0.85rem;
+		color: rgb(var(--gray));
+		margin: 0;
+	}
+
+	/* Cards */
+	.card {
+		margin-bottom: 4rem;
+	}
+	.card-link {
+		display: block;
+		text-decoration: none;
+		color: rgb(var(--black));
+	}
+	.card-image {
+		width: 100%;
+		overflow: hidden;
+		border-radius: 6px;
+		margin-bottom: 1.25rem;
+		background: rgb(var(--gray-light));
+		aspect-ratio: 16 / 7;
+	}
+	.card-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.5s ease;
+	}
+	.card-link:hover .card-image img {
+		transform: scale(1.04);
+	}
+
+	/* Placeholder when no image */
+	.card-image-placeholder {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.card-image-placeholder span {
+		font-size: 6rem;
+		font-weight: 700;
+		color: rgb(var(--gray));
+		opacity: 0.2;
+		letter-spacing: -0.05em;
+	}
+
+	/* Featured card */
+	.card-featured .card-image {
+		aspect-ratio: 16 / 7;
+	}
+	.card-featured .card-title {
+		font-size: 2rem;
+	}
+
+	/* Card body */
+	.card-body {
+		padding: 0;
+	}
+	.card-date {
+		font-size: 0.78rem;
+		color: rgb(var(--gray));
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		margin: 0 0 0.5em;
+	}
+	.card-title {
+		font-size: 1.4rem;
+		line-height: 1.2;
+		letter-spacing: -0.02em;
+		color: rgb(var(--black));
+		margin: 0 0 0.6em;
+		transition: color 0.15s ease;
+	}
+	.card-link:hover .card-title {
+		color: var(--accent);
+	}
+	.card-desc {
+		font-size: 0.95rem;
+		color: rgb(var(--gray));
+		line-height: 1.6;
+		margin: 0 0 1em;
+	}
+	.card-read {
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: rgb(var(--black));
+		border-bottom: 2px solid var(--accent);
+		padding-bottom: 1px;
+		transition: color 0.15s ease;
+	}
+	.card-link:hover .card-read {
+		color: var(--accent);
+	}
+
+	/* 2-col grid for non-featured posts */
+	.post-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3rem 3rem;
+	}
+	.post-grid .card {
+		margin-bottom: 0;
+	}
+	.post-grid .card-image {
+		aspect-ratio: 3 / 2;
+	}
+	.post-grid .card-title {
+		font-size: 1.2rem;
+	}
+
+	@media (max-width: 720px) {
+		main {
+			padding: 0 1.25em 4em;
+		}
+		.blog-header {
+			padding: 2.5em 0 2em;
+			margin-bottom: 2.5em;
+		}
+		.blog-header h1 {
+			font-size: 2.25rem;
+		}
+		.post-grid {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+		}
+		.card-featured .card-title {
+			font-size: 1.5rem;
+		}
+	}
+</style>
