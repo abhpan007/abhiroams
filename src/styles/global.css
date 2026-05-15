@@ -16,6 +16,9 @@
 		0 2px 6px rgba(var(--gray), 20%), 0 8px 24px rgba(var(--gray), 25%),
 		0 16px 32px rgba(var(--gray), 25%);
 }
+html {
+	overflow-x: hidden;
+}
 body {
 	font-family: var(--font-atkinson);
 	margin: 0;
@@ -24,6 +27,8 @@ body {
 	background: #fff;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
+	overflow-x: hidden;
+	max-width: 100vw;
 	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7;
