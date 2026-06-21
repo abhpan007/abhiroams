@@ -16,6 +16,12 @@ import { SITE_TITLE } from '../consts';
 			<div class="about-wrap">
 				<header class="about-header">
 					<h1>About</h1>
+					<!-- Photo slot: drop in a shot of Abhi that signals the niche —
+					     mid-dive or mid-hike, not a studio headshot. To use a real
+					     photo, import it and replace this placeholder with an <Image>. -->
+					<div class="about-photo" role="img" aria-label="Photo of Abhi coming soon — mid-dive or mid-hike">
+						<span class="about-photo-tag">Photo coming soon</span>
+					</div>
 				</header>
 				<div class="about-body">
 					<p>
@@ -41,6 +47,14 @@ import { SITE_TITLE } from '../consts';
 						And I just got my scuba certification, which has opened up a completely different way of seeing
 						the world — one that happens to be underwater. Staying lean and fit isn't separate from how I
 						travel; it's part of what makes it possible to move the way I do.
+					</p>
+
+					<p>
+						I'm also not trying to spend a lot to do this. Some of the best nights of any trip
+						have been the cheapest ones — a family-run inn instead of the place with the
+						reservation list, a walk-in counter instead of the spot everyone's heard of. You don't
+						need a big budget to travel well. You need to be willing to go a little further off the
+						route.
 					</p>
 
 					<p>
@@ -76,6 +90,34 @@ import { SITE_TITLE } from '../consts';
 		margin: 0;
 		position: sticky;
 		top: 2em;
+	}
+	.about-photo {
+		margin-top: 1.5em;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		aspect-ratio: 4 / 5;
+		width: 100%;
+		border: 2px dashed rgb(var(--gray-light));
+		border-radius: 12px;
+		background: repeating-linear-gradient(
+			45deg,
+			rgba(var(--gray-light), 0.35),
+			rgba(var(--gray-light), 0.35) 12px,
+			transparent 12px,
+			transparent 24px
+		);
+	}
+	.about-photo-tag {
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+		background: #fff;
+		padding: 0.4em 0.9em;
+		border-radius: 999px;
+		box-shadow: 0 1px 4px rgba(var(--gray), 25%);
 	}
 	.about-body {
 		max-width: 640px;

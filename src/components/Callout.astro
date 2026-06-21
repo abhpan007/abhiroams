@@ -1,0 +1,49 @@
+---
+interface Props {
+	title?: string;
+	icon?: string;
+}
+
+const { title, icon } = Astro.props;
+---
+
+<aside class="callout">
+	{title && <p class="callout-title">{icon && <span class="callout-icon">{icon}</span>}{title}</p>}
+	<div class="callout-body">
+		<slot />
+	</div>
+</aside>
+
+<style>
+	.callout {
+		margin: 2.5em 0;
+		padding: 1.25em 1.5em;
+		border: 1px solid rgb(var(--gray-light));
+		border-left: 4px solid var(--accent);
+		border-radius: 8px;
+		background: rgba(var(--gray-light), 0.25);
+	}
+	.callout-title {
+		margin: 0 0 0.4em;
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--accent-dark);
+		display: flex;
+		align-items: center;
+		gap: 0.45em;
+	}
+	.callout-icon {
+		font-size: 1rem;
+	}
+	.callout-body :global(p) {
+		margin: 0;
+		font-size: 0.98rem;
+		line-height: 1.65;
+		color: rgb(var(--gray-dark));
+	}
+	.callout-body :global(p + p) {
+		margin-top: 0.6em;
+	}
+</style>

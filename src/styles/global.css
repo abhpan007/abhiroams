@@ -34,8 +34,9 @@ body {
 	line-height: 1.7;
 }
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 720px;
 	margin: auto;
 	padding: 3em 1em;
 }
@@ -48,6 +49,7 @@ h6 {
 	margin: 0 0 0.5rem 0;
 	color: rgb(var(--black));
 	line-height: 1.2;
+	scroll-margin-top: 1.5em;
 }
 h1 {
 	font-size: 3.052em;
@@ -93,6 +95,28 @@ table {
 img {
 	max-width: 100%;
 	height: auto;
+	border-radius: 8px;
+}
+video {
+	max-width: 100%;
+	height: auto;
+	border-radius: 8px;
+	display: block;
+}
+.video-embed {
+	position: relative;
+	width: 100%;
+	padding-bottom: 56.25%; /* 16:9 */
+	height: 0;
+	overflow: hidden;
+	border-radius: 8px;
+}
+.video-embed iframe {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
 	border-radius: 8px;
 }
 code {
