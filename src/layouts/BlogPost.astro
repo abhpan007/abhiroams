@@ -36,6 +36,16 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				padding: 1em;
 				color: rgb(var(--gray-dark));
 			}
+			.prose :global(.wide) {
+				width: min(1100px, calc(100vw - 2em));
+				margin-left: 50%;
+				transform: translateX(-50%);
+			}
+			.prose :global(.wide img),
+			.prose :global(.wide video) {
+				width: 100%;
+				height: auto;
+			}
 			.title {
 				margin-bottom: 1em;
 				padding: 1em 0;
