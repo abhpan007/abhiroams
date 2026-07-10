@@ -1,0 +1,115 @@
+---
+interface Props {
+	/**
+	 * Path to a self-hosted clip. Easiest path: drop the file in `public/`
+	 * (e.g. `public/japan/dive-1.mp4`) and pass `src="/japan/dive-1.mp4"`.
+	 * While this is undefined the component renders a captioned placeholder.
+	 */
+	src?: string;
+	caption: string;
+	poster?: string;
+	loop?: boolean;
+	muted?: boolean;
+	controls?: boolean;
+	autoplay?: boolean;
+	wide?: boolean;
+}
+
+const {
+	src,
+	caption,
+	poster,
+	loop = true,
+	muted = true,
+	controls = true,
+	autoplay = false,
+	wide = false,
+} = Astro.props;
+---
+
+<figure class:list={['video-figure', { wide }]}>
+	{
+		src ? (
+			<video
+				src={src}
+				poster={poster}
+				loop={loop}
+				muted={muted}
+				controls={controls}
+				autoplay={autoplay}
+				playsinline
+			/>
+		) : (
+			<div class="placeholder" role="img" aria-label={`Video placeholder: ${caption}`}>
+				<span class="play" aria-hidden="true">▶</span>
+				<span class="placeholder-tag">Video clip coming soon</span>
+			</div>
+		)
+	}
+	<figcaption>{caption}</figcaption>
+</figure>
+
+<style>
+	.video-figure {
+		margin: 2.5em 0;
+	}
+	.video-figure :global(video) {
+		display: block;
+		width: auto;
+		max-width: 100%;
+		height: auto;
+		max-height: 80vh;
+		margin: 0 auto;
+		border-radius: 12px;
+		box-shadow: var(--box-shadow);
+	}
+	.placeholder {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.75em;
+		aspect-ratio: 16 / 9;
+		width: 100%;
+		border: 2px dashed rgb(var(--gray-light));
+		border-radius: 12px;
+		background: repeating-linear-gradient(
+			45deg,
+			rgba(var(--gray-light), 0.35),
+			rgba(var(--gray-light), 0.35) 12px,
+			transparent 12px,
+			transparent 24px
+		);
+	}
+	.play {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 3rem;
+		height: 3rem;
+		padding-left: 3px;
+		border-radius: 50%;
+		background: #fff;
+		color: var(--accent);
+		font-size: 1.1rem;
+		box-shadow: 0 2px 8px rgba(var(--gray), 30%);
+	}
+	.placeholder-tag {
+		font-size: 0.8rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+		background: #fff;
+		padding: 0.4em 0.9em;
+		border-radius: 999px;
+		box-shadow: 0 1px 4px rgba(var(--gray), 25%);
+	}
+	figcaption {
+		margin-top: 0.75em;
+		font-size: 0.85rem;
+		line-height: 1.5;
+		color: rgb(var(--gray));
+		text-align: center;
+	}
+</style>
