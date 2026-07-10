@@ -22,7 +22,7 @@ const { src, alt, caption, wide = false, width = 1020, height = 620 } = Astro.pr
 <figure class:list={['figure', { wide }]}>
 	{
 		src ? (
-			<Image src={src} alt={alt ?? caption} width={width} height={height} />
+			<Image src={src} alt={alt ?? caption} width={width} />
 		) : (
 			<div class="placeholder" role="img" aria-label={`Image placeholder — ${caption}`}>
 				<span class="placeholder-tag">Photo coming soon</span>
