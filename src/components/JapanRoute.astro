@@ -14,7 +14,8 @@ const linePoints = stops.map((s) => `${s.x},${s.y}`).join(' ');
 ---
 
 <figure class="route">
-	<svg viewBox="0 0 760 210" role="img" aria-label="Trip route: Tokyo, Hokkaido, Hiroshima, Onomichi, Kyoto, Osaka, Okinawa">
+	<div class="route-scroll">
+		<svg viewBox="0 0 760 210" role="img" aria-label="Trip route: Tokyo, Hokkaido, Hiroshima, Onomichi, Kyoto, Osaka, Okinawa">
 		<polyline points={linePoints} class="route-line" />
 		{
 			stops.map((s) => (
@@ -31,7 +32,8 @@ const linePoints = stops.map((s) => `${s.x},${s.y}`).join(' ');
 				</g>
 			))
 		}
-	</svg>
+		</svg>
+	</div>
 	<figcaption>
 		Tokyo to Okinawa, seven regions in a little under three weeks. One set of flights
 		booked, and almost nothing in between.
@@ -42,8 +44,14 @@ const linePoints = stops.map((s) => `${s.x},${s.y}`).join(' ');
 	.route {
 		margin: 2.5em 0;
 	}
+	.route-scroll {
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
 	.route svg {
+		display: block;
 		width: 100%;
+		min-width: 620px;
 		height: auto;
 	}
 	.route-line {
