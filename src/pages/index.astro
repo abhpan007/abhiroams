@@ -7,17 +7,17 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
-import redValleyPeru from '../assets/red_valley_peru.jpg';
-import icelandRavine from '../assets/iceland_ravine.JPG';
-import icelandWaterfall from '../assets/iceland_waterfall.JPG';
-import machuPichu from '../assets/machu_pichu.jpg';
-
-const heroImages = await Promise.all([
-	getImage({ src: redValleyPeru, width: 1920, format: 'webp' }),
-	getImage({ src: icelandRavine, width: 1920, format: 'webp' }),
-	getImage({ src: icelandWaterfall, width: 1920, format: 'webp' }),
-	getImage({ src: machuPichu, width: 1920, format: 'webp' }),
-]);
+// Every image in src/assets/hero/ becomes a slide automatically.
+// To add or remove a slide, just add or remove a file in that folder.
+const heroModules = import.meta.glob<{ default: ImageMetadata }>(
+	'../assets/hero/*.{jpg,JPG,jpeg,JPEG,png,PNG,webp}',
+	{ eager: true },
+);
+const heroImages = await Promise.all(
+	Object.values(heroModules).map((mod) =>
+		getImage({ src: mod.default, width: 1920, format: 'webp' }),
+	),
+);
 
 const posts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())

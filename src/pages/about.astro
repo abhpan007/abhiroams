@@ -1,8 +1,17 @@
 ---
+import { Image } from 'astro:assets';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE } from '../consts';
+
+// Drop a photo named abhi.jpg (or .jpeg/.png/.webp) into src/assets/ and it
+// automatically replaces the "Photo coming soon" placeholder. No code edits.
+const abhiModules = import.meta.glob<{ default: ImageMetadata }>(
+	'../assets/abhi.{jpg,JPG,jpeg,JPEG,png,PNG,webp}',
+	{ eager: true },
+);
+const abhiPhoto = Object.values(abhiModules)[0]?.default;
 ---
 
 <!doctype html>
@@ -16,53 +25,59 @@ import { SITE_TITLE } from '../consts';
 			<div class="about-wrap">
 				<header class="about-header">
 					<h1>About</h1>
-					<!-- Photo slot: drop in a shot of Abhi that signals the niche —
-					     mid-dive or mid-hike, not a studio headshot. To use a real
-					     photo, import it and replace this placeholder with an <Image>. -->
-					<div class="about-photo" role="img" aria-label="Photo of Abhi coming soon — mid-dive or mid-hike">
-						<span class="about-photo-tag">Photo coming soon</span>
-					</div>
+					{
+						abhiPhoto ? (
+							<Image src={abhiPhoto} alt="Abhi Pandya" width={800} class="about-photo-img" />
+						) : (
+							<div class="about-photo" role="img" aria-label="Photo of Abhi coming soon">
+								<span class="about-photo-tag">Photo coming soon</span>
+							</div>
+						)
+					}
 				</header>
 				<div class="about-body">
 					<p>
-						I'm Abhi Pandya — 23 years old, UT Austin McCombs graduate (master's degree), and someone who
-						has had a hard time staying in one place for very long. I've visited over 30 countries, backpacked
-						through more than 10 of them, and I'm working toward something most people think is a little
-						ambitious: every country in the world. I'm serious about it.
+						I'm Abhi Pandya. I'm 23, I just wrapped up my master's at UT Austin McCombs, and I've
+						never been great at staying in one place for very long. So far that restlessness has
+						turned into 30-something countries, more than 10 of them backpacked with everything I
+						needed on my back. And the end goal is easy to say and a little crazy to actually do:
+						every country in the world. I'm dead serious about it.
 					</p>
 
 					<p>
-						The way I travel matters to me. There's a difference between being a vacationer and being a
-						traveler, and I think about that distinction a lot. I'm not interested in checking off landmarks
-						or staying somewhere comfortable just because it's familiar. I want the version of a place that
-						most tourists never see. A few years ago I spent two days moving through a cave system in
-						Vietnam — not a quick tour, a real multi-day underground experience. That's the kind of thing I'm
-						chasing. The stuff that takes a little more effort, a little more willingness to say yes to
-						something unusual, and that you won't find on a highlight reel.
+						But how I get there matters just as much as getting there. There's a difference between
+						being a vacationer and being a traveler, and I think about that distinction a lot. I'm
+						not trying to check landmarks off a list or stay somewhere comfortable just because it's
+						familiar. I want the version of a place that most tourists never see. A few years ago in
+						Vietnam, I spent two days moving through a cave system. Not the quick tour, an actual
+						multi-day underground trip. That's the kind of thing I'm chasing: the stuff that takes a
+						little more effort, a little more willingness to say yes to something unusual, and that
+						never makes it onto a highlight reel.
 					</p>
 
 					<p>
-						Outside of travel, I'm a climber, a hiker, and generally someone who needs to be doing something
-						active or I go a little stir-crazy. I've been hiking since I was a kid. I'm into extreme sports.
-						And I just got my scuba certification, which has opened up a completely different way of seeing
-						the world — one that happens to be underwater. Staying lean and fit isn't separate from how I
-						travel; it's part of what makes it possible to move the way I do.
+						Even when I'm home, I need to be doing something active or I go a little stir-crazy.
+						I've been hiking since I was a kid, I climb, I'm into extreme sports, and I just got my
+						scuba certification, which basically opened up a whole second world to explore that
+						happens to be underwater. Staying lean and fit isn't separate from the travel either.
+						It's what makes it possible to move the way I do.
 					</p>
 
 					<p>
-						I'm also not trying to spend a lot to do this. Some of the best nights of any trip
-						have been the cheapest ones — a family-run inn instead of the place with the
-						reservation list, a walk-in counter instead of the spot everyone's heard of. You don't
-						need a big budget to travel well. You need to be willing to go a little further off the
-						route.
+						Here's the other thing: I'm not trying to spend a lot to do this. Some of the best
+						nights of any trip have been the cheapest ones, a family-run inn instead of the place
+						with the reservation list, a walk-in counter instead of the spot everyone's heard of.
+						You don't need a big budget to travel well. You need to be willing to go a little
+						further off the route.
 					</p>
 
 					<p>
-						This blog is for people who feel the same pull. If you want to escape into the world — really
-						experience it, not just photograph it from a safe distance — then you're in the right place. I'll
-						write about the trips, the food worth going out of your way for, the trails, the dives, and
-						whatever else ends up being worth talking about. No fluff, no sponsored roundups of the same
-						fifteen tourist spots. Just what it actually looks like to go somewhere and mean it.
+						So that's what this blog is. If you feel that same pull to actually experience the
+						world instead of photographing it from a safe distance, you're in the right place. I'll
+						write about the trips, the food worth going out of your way for, the trails, the dives,
+						and whatever else ends up being worth talking about. No fluff, no sponsored roundups of
+						the same fifteen tourist spots. Just what it actually looks like to go somewhere and
+						mean it.
 					</p>
 				</div>
 			</div>
@@ -90,6 +105,14 @@ import { SITE_TITLE } from '../consts';
 		margin: 0;
 		position: sticky;
 		top: 2em;
+	}
+	.about-header :global(.about-photo-img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		margin-top: 1.5em;
+		border-radius: 12px;
+		box-shadow: var(--box-shadow);
 	}
 	.about-photo {
 		margin-top: 1.5em;
