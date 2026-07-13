@@ -13,18 +13,22 @@ interface Props {
 	 * 2 or 3 images shown side by side. Each item renders a captioned
 	 * placeholder until you give it a `src` (import the image and pass it),
 	 * so the collage can be wired in one item at a time.
+	 * `layout="2-1"` puts the first two items in a row with the third
+	 * centered below them.
 	 */
 	items: Item[];
 	caption?: string;
 	wide?: boolean;
+	layout?: 'row' | '2-1';
 }
 
-const { items, caption, wide = false } = Astro.props;
+const { items, caption, wide = false, layout = 'row' } = Astro.props;
 const count = Math.min(items.length, 3);
+const gridClass = layout === '2-1' && count === 3 ? 'grid-2-1' : `grid-${count}`;
 ---
 
 <figure class:list={['collage', { wide }]}>
-	<div class:list={['grid', `grid-${count}`]}>
+	<div class:list={['grid', gridClass]}>
 		{
 			items.map((it) =>
 				it.src ? (
@@ -54,6 +58,14 @@ const count = Math.min(items.length, 3);
 	}
 	.grid-3 {
 		grid-template-columns: 1fr 1fr 1fr;
+	}
+	.grid-2-1 {
+		grid-template-columns: 1fr 1fr;
+	}
+	.grid-2-1 > :global(*:nth-child(3)) {
+		grid-column: 1 / -1;
+		max-width: 72%;
+		justify-self: center;
 	}
 	.grid :global(img) {
 		display: block;

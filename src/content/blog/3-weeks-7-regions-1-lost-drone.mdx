@@ -27,11 +27,14 @@ import asahidakeLookout from '../../assets/japan/asahidake_lookout.JPG';
 import furanoBar from '../../assets/japan/furano_bar.JPG';
 import typicalBreakfast from '../../assets/japan/typical_breakfast.JPG';
 import hokkaidoDrive from '../../assets/japan/hokkaido_random.JPG';
+import kamifuranoAirbnb from '../../assets/japan/kamifurano_airbnb.jpg';
+import earthenAirbnb from '../../assets/japan/Earthen_airbnb.jpg';
 import mtAsahidake from '../../assets/japan/mt_asahidake.JPG';
 import gingaWaterfall from '../../assets/japan/ginga_waterfall.JPG';
 import capeNotoro from '../../assets/japan/cape_notoro.JPG';
 import shiretoko from '../../assets/japan/shiretoko.JPG';
 import orcas from '../../assets/japan/hokkaido_orcas.JPG';
+import hiroshimaMorning from '../../assets/japan/hiroshima_morning.JPG';
 import hotelCycle from '../../assets/japan/hotel_cycle.jpeg';
 import onomichiBiking from '../../assets/japan/onomichi_biking.jpeg';
 import kosanji from '../../assets/japan/Kosanji.JPG';
@@ -46,7 +49,7 @@ import fushimi3 from '../../assets/japan/fushimi_inari_3.JPG';
 import usj from '../../assets/japan/usj.JPG';
 import zeddRide from '../../assets/japan/zedd_ride_usj.JPG';
 import candeoView from '../../assets/japan/candeo_tower_view.JPG';
-import okinawaAirbnb1 from '../../assets/japan/okinawa_airbnb_1.png';
+import okinawaAirbnb1 from '../../assets/japan/Nanjo_airbnb.jpg';
 import okinawaAirbnb2 from '../../assets/japan/okinawa_airbnb_2.JPG';
 import diveVid1 from '../../assets/japan/dive_vid_1.MP4';
 import diveVid2 from '../../assets/japan/dive_vid_2.MP4';
@@ -80,11 +83,11 @@ We found soba at a spot called Ramen Torisoba, sat there appreciating the fact t
 We were up early and gave the morning to the classic stuff, and I'm not going to pretend to be above it, because some of it earns the hype. The Imperial Palace and its gardens first, then a loop through a few shrines, with Meiji Jingu and Senso-ji being the standouts. We ducked into a couple of cafes and lunch spots in between too, Cafe 1 Part and Sekiguchi, mostly to sit down for a minute and recharge before the next stretch.
 
 <Collage
-	caption="Tokyo's classics, mostly knocked out in a morning."
+	wide
+	caption="Tokyo's classics, mostly knocked out in a morning: Senso-ji and the Meiji Jingu sake barrels."
 	items={[
 		{ src: sensoJi, caption: 'Senso-ji' },
 		{ src: meijiBarrels, caption: 'the Meiji Jingu sake barrels' },
-		{ caption: 'the Imperial Palace gardens' },
 	]}
 />
 
@@ -164,7 +167,7 @@ From the summit we crossed to the other side of the mountain to the Sounkyo Gorg
 
 We'd actually botched the Airbnb situation for that night, so we had to backtrack a couple of hours to a place near Kamifurano. Totally worth it though. It was a two-story lofted Airbnb sitting in the middle of farmland, with big views out to the mountains and the fields. One of those stays that's as much a part of the day as anything you drove to go see.
 
-<Figure caption="Placeholder: the lofted Kamifurano farmland Airbnb, or the mountain and field views" />
+<Figure src={kamifuranoAirbnb} caption="The lofted Airbnb in the Kamifurano farmland, worth every minute of the backtrack." />
 
 ### Day 3: the long drive to Abashiri
 
@@ -174,7 +177,7 @@ Mostly a driving day, and a good one. We started at a local fox farm (a lot of f
 
 Dinner that night was at Yoshida Mihachi Shouten in Abashiri, and it's on my Beli if you want the actual breakdown. Abashiri itself was interesting, a lot of infrastructure for not a lot of people. But the part I keep thinking about is the Airbnb. It was a handmade home, built by local people, all earthen and natural shapes with these outdoor and nature-facing spaces, and modern in all the right spots. It's one of those places where you remember the building itself, not just the view.
 
-<Figure caption="Placeholder: the earthen, handmade Airbnb in Abashiri, exterior (the one called out in the notes)" />
+<Figure src={earthenAirbnb} caption="The handmade earthen Airbnb in Abashiri, built by local hands and unlike anywhere else we stayed." />
 
 ### Day 4: Shiretoko, and a tough call
 
@@ -202,7 +205,7 @@ Hiroshima was mostly a travel day, so I'll keep it like one. A few hours in the 
 
 I want to be clear though: we will absolutely be coming back to Hiroshima. The city deserves real time, and with the goals we'd set for this trip we just didn't have it to give. I really wish we did. Blowing through it in a night is not a statement about Hiroshima, it's a statement about our itinerary.
 
-<Figure caption="Placeholder: Hiroshima at street level (downtown in the evening)" />
+<Figure src={hiroshimaMorning} caption="Hiroshima the next morning, right before we caught the train out. We'll be back for real next time." />
 
 ## Onomichi
 
@@ -256,11 +259,12 @@ After dinner we drove out to Fushimi Inari Taisha, the thousand torii gates you'
 
 <Collage
 	wide
+	layout="2-1"
 	caption="Fushimi Inari at night, the torii gates with basically nobody around."
 	items={[
 		{ src: fushimi1, caption: 'walking up through the gates' },
-		{ src: fushimi3, caption: 'inside the gates' },
 		{ src: fushimi2, caption: 'higher up the mountain' },
+		{ src: fushimi3, caption: 'inside the gates' },
 	]}
 />
 
