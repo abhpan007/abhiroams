@@ -17,7 +17,11 @@ const abhiPhoto = Object.values(abhiModules)[0]?.default;
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`About — ${SITE_TITLE}`} description="Who is Abhi Pandya? A 23-year-old UT Austin grad on a mission to see every country in the world." />
+		<BaseHead
+			title={`About — ${SITE_TITLE}`}
+			description="Who is Abhi Pandya? A 23-year-old UT Austin grad on a mission to see every country in the world."
+			image={abhiPhoto}
+		/>
 	</head>
 	<body>
 		<Header />
