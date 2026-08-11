@@ -2,18 +2,59 @@
 title: 'I Tapped Out on Lobster'
 description: 'A week in Maine with my family, from Portland up through Acadia, and what happens when you are not the one planning the trip.'
 pubDate: '2026-08-09'
-# Drop a hero photo in src/assets/maine/ and point this at it, e.g.
-# heroImage: ../../assets/maine/hero.jpg
+heroImage: ../../assets/maine/bass_harbor_hero.jpg
 ---
 
 import Figure from '../../components/Figure.astro';
 import Collage from '../../components/Collage.astro';
+import Video from '../../components/Video.astro';
 import Callout from '../../components/Callout.astro';
 import PullQuote from '../../components/PullQuote.astro';
 
+import bassHarborHero from '../../assets/maine/bass_harbor_hero.jpg';
+import highRoller from '../../assets/maine/high_roller.jpeg';
+import llBean from '../../assets/maine/LL_bean_flagship.JPG';
+import countryInn from '../../assets/maine/Country_inn.jpeg';
+import rocklandHarbor from '../../assets/maine/rockland_harbor.jpg';
+import mtBattie from '../../assets/maine/mt_battie.jpg';
+import camdenDeli from '../../assets/maine/camden_deli.jpeg';
+import acadiaAirbnb from '../../assets/maine/airbnb.jpeg';
+import bealsDock from '../../assets/maine/beals_dock.jpg';
+import bealsLobster from '../../assets/maine/beals_lobster.jpeg';
+import bealsView from '../../assets/maine/beals_lobster_view.jpeg';
+import bassHarborSunset from '../../assets/maine/bass_harbor_sunset.jpg';
+import cadillacCloudy from '../../assets/maine/cadillac_cloudy.JPG';
+import cadillacClear from '../../assets/maine/cadillac_clearish-2.jpg';
+import beehiveScrambling from '../../assets/maine/beehive_scrambling.JPG';
+import beehiveView from '../../assets/maine/beehive_view.jpg';
+import greatHead from '../../assets/maine/great_head_cloudy.jpg';
+import lobsterPopover from '../../assets/maine/lobster_popover.jpeg';
+import echoLake from '../../assets/maine/echo_lake.jpeg';
+import mansellTree from '../../assets/maine/mansell_tree.JPG';
+import mansellView from '../../assets/maine/mansell_view.JPG';
+import mansellFam from '../../assets/maine/mansell_fam.JPG';
+import longPond from '../../assets/maine/long_pond.JPG';
+import donerSandwich from '../../assets/maine/doner_sandwich.jpeg';
+import agamontPark from '../../assets/maine/agamont_park-2.jpg';
+import agamontSunset from '../../assets/maine/agamont_sunset-2.jpg';
+import thunderHoleVid from '../../assets/maine/thunder_hole_vid.MP4';
+import rocksWater from '../../assets/maine/rocks_water-2.jpg';
+import birdsBeach from '../../assets/maine/birds_beach-2.jpg';
+import zenGarden1 from '../../assets/maine/zen_garden_1-2.jpg';
+import zenGarden2 from '../../assets/maine/zen_garden_2-2.jpg';
+import zenGarden3 from '../../assets/maine/zen_garden_3-2.jpg';
+import schoodicHead from '../../assets/maine/schoodic_head-2.jpg';
+import schoodicHead2 from '../../assets/maine/schoodic_head_2-2.jpg';
+import coastalRefuge1 from '../../assets/maine/coastal_refuge_1-2.jpg';
+import coastalRefuge2 from '../../assets/maine/coastal_Refuge_2-2.jpg';
+import masonsBurger from '../../assets/maine/masons_burger.jpeg';
+import portlandHeadlight from '../../assets/maine/portland_headlight.jpg';
+import flatbreadPizza from '../../assets/maine/flatbread_pizza.jpeg';
+
 <Figure
 	wide
-	caption="Placeholder: hero shot (Bass Harbor Head Light at sunset, or the view from the Beehive)"
+	src={bassHarborHero}
+	caption="Bass Harbor Head Light, which is worth the parking-lot patience."
 />
 
 This one was different. Most of my trips start with me building the whole thing from scratch and then spending a week putting my body through the wringer. This time I met up with my family in Maine, and I was just along for the ride.
@@ -32,43 +73,45 @@ I landed in Maine around 4pm, and my family, who'd already been there a couple o
 
 I was dying of hunger, so we stopped in downtown Portland for a quick bite at High Roller Lobster Company. That place was amazing. I got a lobster grilled cheese and I honestly have no words. Really good, and I got a solid cider with it. Perfect after a long day.
 
-<Figure caption="Placeholder: the lobster grilled cheese at High Roller Lobster Company" />
+<Figure src={highRoller} caption="The lobster grilled cheese at High Roller Lobster Company. Lobster count: one." />
 
 The sun sets really late in Maine in the summer, so we kept the day going and stopped in Freeport at the L.L. Bean flagship store. This is where my dad specifically spent about two hours and dropped damn near $700. It was insane, but we all got some stuff, so I can't complain too much.
 
-<Figure caption="Placeholder: the L.L. Bean flagship store in Freeport (the giant boot out front)" />
+<Figure src={llBean} caption="The L.L. Bean flagship in Freeport, where my dad did most of the damage." />
 
 We spent the rest of the evening just getting to our hotel, The Country Inn at Camden Rockport, which turned out to be an absolutely amazing little inn. We got in pretty late, so after check-in we hit a quick shower and crashed hard.
+
+<Figure src={countryInn} caption="The Country Inn at Camden Rockport." />
 
 ## Day 2: up the coast to Acadia
 
 We were up around 7:00 AM for breakfast at the inn, and it turned out to be the best surprise of the trip. We didn't find out until we were leaving that they're known for their breakfast, specifically their homemade waffles. Great little way to start the day.
 
-<Figure caption="Placeholder: the homemade waffles at The Country Inn at Camden Rockport" />
-
 From there we headed south into Rockland to hit a couple of places a friend had recommended, specifically Main Street Markets and the Atlantic Baking Co. bakery. We picked up a coffee and some bread that intrigued us, then stopped by the harbor to eat it all before continuing up the coast.
 
-<Collage
-	caption="Placeholder: Rockland (Main Street Markets, Atlantic Baking Co., and the harbor we ate at)"
-	items={[
-		{ caption: 'Atlantic Baking Co.' },
-		{ caption: 'the Rockland harbor' },
-	]}
-/>
+<Figure src={rocklandHarbor} caption="The Rockland harbor, where we sat and ate the bakery haul." />
 
 Then we doubled back up to Camden and went to Camden Hills State Park, where we took a short drive up to Mount Battie just to see the lookout. It was beautiful. We only spent about 30 minutes in the park before heading into the downtown area to eat at the Camden Deli. We ended up killing a couple of hours there just going shop to shop through all the tourist spots.
 
-<Figure caption="Placeholder: the lookout from Mount Battie in Camden Hills State Park" />
+<Figure src={mtBattie} caption="The lookout from Mount Battie in Camden Hills State Park." />
+
+<Figure src={camdenDeli} caption="Lunch at the Camden Deli before we started shop-hopping." />
 
 After that we started up the coast toward Acadia, where we were staying for the night near the Southwest Harbor. We had a cute little stay and spent a couple of hours relaxing before finding food at Beal's Lobster Pier, which had great views of the harbor and amazing lobster dishes. Then we spent the last bit of the evening at the Bass Harbor Head Light Station for sunset, which was just awesome.
 
+<Figure src={acadiaAirbnb} caption="Our place near the Southwest Harbor for the Acadia stretch." />
+
 <Collage
-	caption="Placeholder: Beal's Lobster Pier and sunset at Bass Harbor Head Light"
+	caption="Beal's Lobster Pier: the dock, the view, and the reason my lobster count kept climbing."
 	items={[
-		{ caption: "dinner at Beal's Lobster Pier" },
-		{ caption: 'Bass Harbor Head Light at sunset' },
+		{ src: bealsDock, caption: 'the dock at Beal\'s' },
+		{ src: bealsView, caption: 'the view from the table' },
 	]}
 />
+
+<Figure src={bealsLobster} caption="Lobster count: somewhere around three." />
+
+<Figure src={bassHarborSunset} caption="Sunset at Bass Harbor Head Light Station." />
 
 <Callout title="Bass Harbor at sunset" icon="🌅">
 Get there a little before sunset. The parking lot is small, so you end up waiting for people to leave before you can park, and if you show up too late you can miss the whole thing.
@@ -80,9 +123,13 @@ We spent the rest of the evening watching late-night World Cup games, and I went
 
 Got up early as all hell to make our 7am entrance time on the Cadillac Summit Road. You have to reserve that in advance, and it's worth it. It was a cloudy morning, so we got to the top and couldn't see much at first. We just waited and rotted on some rocks until the clouds cleared, and then it was breathtaking. Being up there that early meant there were maybe four or five other people at the top with us, which made it an incredibly peaceful way to start a morning.
 
-<Figure
+<Collage
 	wide
-	caption="Placeholder: the view from Cadillac Summit once the clouds cleared"
+	caption="Cadillac Summit: what we showed up to, and what we waited out the clouds for."
+	items={[
+		{ src: cadillacCloudy, caption: 'socked in at 7am' },
+		{ src: cadillacClear, caption: 'once it cleared' },
+	]}
 />
 
 <Callout title="Cadillac Summit Road" icon="🚗">
@@ -93,27 +140,23 @@ We headed down as the weather got better and prepared for the first hike: the Be
 
 A quick summary of what you actually experience: you climb for a while, with some sketchy parts in the middle. That's it. I was fully expecting my family to hate this and they absolutely loved it. Even my sister was having fun despite everything she'd talked herself into beforehand. The view from the top was once again spectacular, looking down at Sand Beach and a good portion of the eastern part of Acadia.
 
-<Collage
-	caption="Placeholder: the Beehive Trail (the scrambling section and the view down at Sand Beach)"
-	items={[
-		{ caption: 'scrambling up the Beehive' },
-		{ caption: 'looking down at Sand Beach' },
-	]}
-/>
+<Figure src={beehiveScrambling} caption="The scrambling section of the Beehive. Sketchier in the photos than it is on the rock." />
+
+<Figure src={beehiveView} caption="The view from the top of the Beehive, looking down at Sand Beach." />
 
 After the three mile trek it was barely 11am and we still had energy left, so we spent the rest of it on one more flat hike. The poorly named Great Head Trail took us to, well, the Great Head. It looks out toward the Atlantic, and with the clouds rolling back in it was kind of majestic.
 
-<Figure caption="Placeholder: the Great Head Trail looking out at the Atlantic" />
+<Figure src={greatHead} caption="The Great Head Trail, with the clouds rolling back in." />
 
 The weather only got worse from there, so we decided to head to the inland part of the park and come back another day for the rest of the Park Loop Road.
 
 The Argentina vs Morocco game was coming up around 2pm, and as much as we loved the park, we really wanted to watch it. Conveniently we were also pretty hungry, so we stopped at the famous Jordan Pond House Restaurant. After a long wait and an insane second half, we finally got to eating, and I had lobster for what felt like the seventh time that trip. Don't get me wrong, it was great, but I think that was one of the last times I got lobster that week. The infamous popover was great, and the blueberry soda was unique but definitely worth it.
 
-<Figure caption="Placeholder: the popover and blueberry soda at Jordan Pond House" />
+<Figure src={lobsterPopover} caption="Jordan Pond House: the popover, the blueberry soda, and yet more lobster." />
 
 The whole fam was tired on the way back, but I wanted to jump in the lake that was five minutes from our Airbnb: Echo Lake Beach. So I did. Forced my family to wake up from their nap and dragged them along. The lake was cold as hell but absolutely beautiful, and after about four minutes in the water we headed back.
 
-<Figure caption="Placeholder: Echo Lake Beach" />
+<Figure src={echoLake} caption="Echo Lake Beach. I lasted about four minutes." />
 
 The rest of the day was quite literally a rest day. We barely moved, ordered takeout, and watched the World Cup until we fell asleep.
 
@@ -122,10 +165,12 @@ The rest of the day was quite literally a rest day. We barely moved, ordered tak
 We started late, around 9am, since everyone woke up a bit sore from the day before. And guess what, much to my family's dismay, we were about to start another hike. Luckily the trailhead was maybe a three minute drive down the road from the Airbnb. It wasn't an easy one, though. Mansell Mountain Trail is a steep three mile round trip with such unique scenery throughout. Everything from ocean views to trails lined with huge trees, this one had it all. And the best part was that I think we had exactly one encounter with another human the entire time.
 
 <Collage
-	caption="Placeholder: Mansell Mountain Trail (the tree-lined trail and the ocean views)"
+	layout="2-1"
+	caption="Mansell Mountain: the big trees, the ocean view, and the family that did not sign up for this."
 	items={[
-		{ caption: 'the trail through the big trees' },
-		{ caption: 'the view out to the ocean' },
+		{ src: mansellTree, caption: 'the trail through the big trees' },
+		{ src: mansellView, caption: 'the view out to the ocean' },
+		{ src: mansellFam, caption: 'the crew' },
 	]}
 />
 
@@ -133,34 +178,51 @@ We finished the trail by noon and went back to the Airbnb for a quick snack and 
 
 <Figure
 	wide
-	caption="Placeholder: kayaking out on Long Pond"
+	src={longPond}
+	caption="Long Pond, where we spent two and a half hours doing very little."
 />
 
 After an insane tan and back workout, we headed back toward the Airbnb and stopped by Echo Lake again. This time the whole fam decided to get in, and we stuck around longer because the water felt warmer than the day before and we somehow had a good amount of energy left.
 
 The rest of the evening was pretty relaxed. We showered, got ready, and headed toward Bar Harbor. This was our first time in the area, and we stopped by a Mediterranean spot for dinner called Limon Grille. I wasn't expecting much, especially since it was the only restaurant on the block with nobody in it, and being in the middle of a national park town didn't help either. I was so wrong. The doner sandwich was amazing. We were pleasantly surprised, and happy we'd beaten the crowd that was standing outside the door by the time we finished eating.
 
-<Figure caption="Placeholder: the doner sandwich at Limon Grille in Bar Harbor" />
+<Figure src={donerSandwich} caption="The doner sandwich at Limon Grille. The best thing I ate all week, from the emptiest restaurant on the block." />
 
 After dinner we walked around the area and ended up at Agamont Park near the harbor. We laid in the grass and watched a beautiful sunset while being serenaded by squawking seagulls. Pretty awesome end to an active as hell day.
 
-<Figure caption="Placeholder: sunset from Agamont Park in Bar Harbor" />
+<Collage
+	caption="Agamont Park at sunset, seagull soundtrack included."
+	items={[
+		{ src: agamontPark, caption: 'the harbor from the park' },
+		{ src: agamontSunset, caption: 'the sunset' },
+	]}
+/>
 
 ## Day 5: the Park Loop Road redo
 
 We dedicated this day to going back for the things on Park Loop Road that were hard to see on the morning of Day 3 because of the weather, which was basically the entire eastern part of the park. The drive was beautiful and I'm glad we went back, because we had no idea what any of it looked like until the sun came out. We visited Thunder Hole and stopped at random spots to sit on the rocks by the beach and just smell the ocean. It was a peaceful start to the day.
 
+<Video autoplay loop muted controls={false} src={thunderHoleVid} caption="Thunder Hole doing its thing." />
+
 <Collage
-	caption="Placeholder: Park Loop Road with the sun finally out (Thunder Hole and the rocks by the water)"
+	caption="Park Loop Road with the sun finally out."
 	items={[
-		{ caption: 'Thunder Hole' },
-		{ caption: 'sitting on the rocks by the beach' },
+		{ src: rocksWater, caption: 'the rocks by the water' },
+		{ src: birdsBeach, caption: 'birds on the beach' },
 	]}
 />
 
 We kept the same vibes going by visiting the Northeast Harbor botanical zen gardens. Lots of Japanese inspired plants and designs, which was nice to see since I was already missing Japan. Then we stopped for a quick meal at Colonel's Restaurant and Bakery and got a burger. It wasn't an amazing burger, but the goal was to get off the lobster wave for a bit, and I guess we accomplished that.
 
-<Figure caption="Placeholder: the Northeast Harbor botanical zen gardens" />
+<Collage
+	caption="The Northeast Harbor botanical zen gardens, which had me missing Japan all over again."
+	items={[
+		{ src: zenGarden2, caption: 'the gardens' },
+		{ src: zenGarden3, caption: 'more of the grounds' },
+	]}
+/>
+
+<Figure src={zenGarden1} caption="Japanese inspired planting in the zen gardens." />
 
 At this point we'd visited most of the park and wanted to watch some of the interesting World Cup games that were going on. And yeah, yeah, I get the whole don't-be-a-screenager-in-a-national-park thing, but hey, this only happens once every four years.
 
@@ -174,23 +236,25 @@ This was a different experience at a national park for me compared to most. Usua
 
 Today was mainly a driving day. We headed out pretty early to explore more than just Acadia. We wanted to see a little further out east, so we went to Schoodic Head, which was maybe an hour's drive from Acadia. We kind of just rotted on the beach over there, doing what we'd done the day prior: sitting up on the rocks, listening to the waves. A super peaceful start to the day.
 
-<Figure caption="Placeholder: Schoodic Head" />
+<Collage
+	caption="Schoodic Head, an hour east of Acadia and almost empty."
+	items={[
+		{ src: schoodicHead, caption: 'the rocks at Schoodic' },
+		{ src: schoodicHead2, caption: 'looking out from Schoodic Head' },
+	]}
+/>
 
 From there we headed further east to the Maine Coastal National Wildlife Refuge, which was super cool. We did a small hike, about a mile and a half round trip. It was a bit warm, but overall a nice one. There weren't too many people there, and there was a lot of different wildlife and cool birds. One notable thing about that hike is that there are a lot of blueberries along the path, which was really cool to see. We didn't get to eat any because it was still pretty early in the season and they hadn't fully bloomed yet, but still.
 
-<Collage
-	caption="Placeholder: Maine Coastal National Wildlife Refuge (the trail and the blueberries along the path)"
-	items={[
-		{ caption: 'the trail through the refuge' },
-		{ caption: 'blueberries along the path' },
-	]}
-/>
+<Figure src={coastalRefuge1} caption="The trail through the Maine Coastal National Wildlife Refuge." />
+
+<Figure src={coastalRefuge2} caption="More of the refuge. The blueberries along the path were not quite ready yet." />
 
 We decided to head to Bangor afterward, which was about an hour and a half from where we were. Along the way my sister and I were craving fast food while my parents were craving Indian food, so we split up and satisfied our own cravings. After a quick meal we made a pit stop at the L.L. Bean outlet store and decided to spend some more money.
 
 It was almost 5pm by this point, so we checked in at our hotel for the night, the Courtyard Marriott in Bangor, which was a good location for dinner spots close by. After a quick shower and some rest we went to Mason's Brewing Company, where I was determined to get a better burger than the last one. It didn't disappoint. Couldn't tell you the name of my burger, but it was unique, with apple slices in it. Sounded weird before I got it, but trust me, it hit the spot. After a little family walk by the river we called it for the night, since we were headed home the next day and needed to be up early.
 
-<Figure caption="Placeholder: the burger at Mason's Brewing Company in Bangor" />
+<Figure src={masonsBurger} caption="The burger at Mason's Brewing Company. Apple slices in it, and somehow it worked." />
 
 ## Last Day: Portland
 
@@ -200,12 +264,13 @@ Got to see the Portland Head Light, which is what you probably picture when you 
 
 <Figure
 	wide
-	caption="Placeholder: the Portland Head Light"
+	src={portlandHeadlight}
+	caption="The Portland Head Light, which is basically the Maine screensaver."
 />
 
 We had to head to the airport soon and we were all starving, and my parents were eager to go to Flatbread Company in downtown Portland. After 30 minutes of searching for parking we were finally seated and got an incredibly satisfying meal. My sister and I shared a seasonal Mexican style flatbread pizza while my parents had a simple vegetarian one. Honestly an amazing way to end the trip.
 
-<Figure caption="Placeholder: the flatbread pizza at Flatbread Company in Portland" />
+<Figure src={flatbreadPizza} caption="The seasonal Mexican flatbread at Flatbread Company. Worth the 30 minutes of parking." />
 
 ## What stuck with me
 
