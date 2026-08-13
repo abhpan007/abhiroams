@@ -7,9 +7,10 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run pins && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "pins": "node scripts/generate-pins.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.4",

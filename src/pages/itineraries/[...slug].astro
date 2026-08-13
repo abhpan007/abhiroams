@@ -1,0 +1,355 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+
+export async function getStaticPaths() {
+	// Only posts that actually declare an itinerary get a page.
+	const posts = (await getCollection('blog')).filter((p) => p.data.itinerary);
+	return posts.map((post) => ({ params: { slug: post.id }, props: post }));
+}
+
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { title, description, heroImage, itinerary } = post.data;
+const it = itinerary!;
+const postPath = `/blog/${post.id}/`;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`${title} — Itinerary`}
+			description={`A day by day itinerary from ${title}. ${description}`}
+			image={heroImage}
+		/>
+	</head>
+	<body>
+		<div class="screen-only"><Header /></div>
+		<main>
+			<header class="it-header">
+				<p class="eyebrow">Itinerary</p>
+				<h1>{title}</h1>
+				{it.subtitle && <p class="subtitle">{it.subtitle}</p>}
+				<p class="source">
+					From the full write-up at <a href={postPath}>abhiroams.com{postPath}</a>
+				</p>
+				<div class="actions screen-only">
+					<button id="print" type="button">Download as PDF</button>
+					<a class="read-post" href={postPath}>Read the full post &rarr;</a>
+				</div>
+			</header>
+
+			{
+				it.essentials && it.essentials.length > 0 && (
+					<section class="essentials">
+						<h2>Before you go</h2>
+						<dl>
+							{it.essentials.map((e) => (
+								<div class="essential">
+									<dt>{e.label}</dt>
+									<dd>{e.value}</dd>
+								</div>
+							))}
+						</dl>
+					</section>
+				)
+			}
+
+			<section class="days">
+				{
+					it.days.map((d) => (
+						<article class="day">
+							<div class="day-label">{d.day}</div>
+							<div class="day-body">
+								<h3>{d.title}</h3>
+								{d.stops && d.stops.length > 0 && (
+									<div class="row">
+										<span class="row-label">Stops</span>
+										<ul>
+											{d.stops.map((s) => (
+												<li>{s}</li>
+											))}
+										</ul>
+									</div>
+								)}
+								{d.eat && d.eat.length > 0 && (
+									<div class="row">
+										<span class="row-label">Eat</span>
+										<ul>
+											{d.eat.map((s) => (
+												<li>{s}</li>
+											))}
+										</ul>
+									</div>
+								)}
+								{d.stay && (
+									<div class="row">
+										<span class="row-label">Stay</span>
+										<p>{d.stay}</p>
+									</div>
+								)}
+								{d.tip && <p class="tip">{d.tip}</p>}
+							</div>
+						</article>
+					))
+				}
+			</section>
+
+			<p class="footer-note">
+				abhiroams.com &middot; {SITE_TITLE}
+			</p>
+		</main>
+		<div class="screen-only"><Footer /></div>
+
+		<script>
+			document.getElementById('print')?.addEventListener('click', () => window.print());
+		</script>
+
+		<style>
+			main {
+				max-width: 780px;
+				margin: 0 auto;
+				padding: 0 1.25em 5em;
+			}
+
+			/* Header */
+			.it-header {
+				padding: 4em 0 2.5em;
+				border-bottom: 2px solid rgb(var(--black));
+			}
+			.eyebrow {
+				margin: 0 0 0.6em;
+				font-size: 0.75rem;
+				font-weight: 700;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: var(--accent);
+			}
+			.it-header h1 {
+				font-size: 2.6rem;
+				line-height: 1.05;
+				letter-spacing: -0.03em;
+				margin: 0 0 0.3em;
+			}
+			.subtitle {
+				font-size: 1.1rem;
+				color: rgb(var(--gray-dark));
+				margin: 0 0 0.8em;
+			}
+			.source {
+				font-size: 0.85rem;
+				color: rgb(var(--gray));
+				margin: 0;
+			}
+			.actions {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 1.25em;
+				margin-top: 1.75em;
+			}
+			#print {
+				font-family: inherit;
+				font-size: 0.9rem;
+				font-weight: 600;
+				color: #fff;
+				background: var(--accent);
+				border: none;
+				border-radius: 999px;
+				padding: 0.7em 1.4em;
+				cursor: pointer;
+				transition: background 0.15s ease;
+			}
+			#print:hover {
+				background: var(--accent-dark);
+			}
+			.read-post {
+				font-size: 0.9rem;
+				font-weight: 600;
+				color: rgb(var(--black));
+				text-decoration: none;
+				border-bottom: 2px solid var(--accent);
+				padding-bottom: 1px;
+			}
+
+			/* Essentials */
+			.essentials {
+				padding: 2.5em 0 0.5em;
+			}
+			.essentials h2,
+			.days h2 {
+				font-size: 0.78rem;
+				font-weight: 700;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: rgb(var(--gray));
+				margin: 0 0 1.2em;
+			}
+			.essentials dl {
+				margin: 0;
+				display: grid;
+				gap: 0.75em;
+			}
+			.essential {
+				display: grid;
+				grid-template-columns: 190px 1fr;
+				gap: 1em;
+				padding-bottom: 0.75em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.essential dt {
+				font-weight: 700;
+				font-size: 0.95rem;
+			}
+			.essential dd {
+				margin: 0;
+				font-size: 0.95rem;
+				color: rgb(var(--gray-dark));
+			}
+
+			/* Days */
+			.days {
+				padding-top: 2.5em;
+			}
+			.day {
+				display: grid;
+				grid-template-columns: 130px 1fr;
+				gap: 1.5em;
+				padding: 1.75em 0;
+				border-top: 1px solid rgb(var(--gray-light));
+			}
+			.day-label {
+				font-size: 0.8rem;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: var(--accent);
+				padding-top: 0.25em;
+			}
+			.day-body h3 {
+				font-size: 1.25rem;
+				margin: 0 0 0.8em;
+				line-height: 1.25;
+			}
+			.row {
+				display: grid;
+				grid-template-columns: 60px 1fr;
+				gap: 0.75em;
+				margin-bottom: 0.6em;
+			}
+			.row-label {
+				font-size: 0.72rem;
+				font-weight: 700;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: rgb(var(--gray));
+				padding-top: 0.35em;
+			}
+			.row ul {
+				margin: 0;
+				padding-left: 1.1em;
+			}
+			.row li,
+			.row p {
+				font-size: 0.98rem;
+				line-height: 1.6;
+				margin: 0 0 0.2em;
+				color: rgb(var(--gray-dark));
+			}
+			.tip {
+				margin: 0.9em 0 0;
+				padding: 0.7em 1em;
+				font-size: 0.92rem;
+				line-height: 1.55;
+				color: rgb(var(--gray-dark));
+				background: rgba(var(--gray-light), 0.35);
+				border-left: 3px solid var(--accent);
+			}
+			.footer-note {
+				display: none;
+			}
+
+			@media (max-width: 640px) {
+				.it-header h1 {
+					font-size: 1.9rem;
+				}
+				.day,
+				.essential {
+					grid-template-columns: 1fr;
+					gap: 0.5em;
+				}
+				.day-label {
+					padding-top: 0;
+				}
+			}
+
+			/* ── Print / Save as PDF ───────────────────────── */
+			@media print {
+				@page {
+					margin: 14mm 12mm;
+				}
+				.screen-only,
+				.actions {
+					display: none !important;
+				}
+				main {
+					max-width: none;
+					padding: 0;
+				}
+				.it-header {
+					padding: 0 0 1.2em;
+				}
+				.it-header h1 {
+					font-size: 22pt;
+				}
+				.subtitle {
+					font-size: 11pt;
+				}
+				.source,
+				.essential dd,
+				.row li,
+				.row p {
+					color: #000;
+				}
+				.essentials {
+					padding-top: 1.4em;
+				}
+				.days {
+					padding-top: 1.4em;
+				}
+				/* Never split a day across two pages. */
+				.day {
+					break-inside: avoid;
+					page-break-inside: avoid;
+					padding: 1.1em 0;
+				}
+				.essential {
+					break-inside: avoid;
+					page-break-inside: avoid;
+				}
+				.tip {
+					background: none;
+					border-left: 2px solid #000;
+				}
+				.footer-note {
+					display: block;
+					margin-top: 2em;
+					padding-top: 0.8em;
+					border-top: 1px solid #999;
+					font-size: 9pt;
+					color: #444;
+					text-align: center;
+				}
+				a {
+					color: #000;
+					text-decoration: none;
+				}
+			}
+		</style>
+	</body>
+</html>
