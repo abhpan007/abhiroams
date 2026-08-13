@@ -1,0 +1,174 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+
+const trips = (await getCollection('blog'))
+	.filter((p) => p.data.itinerary)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Itineraries — ${SITE_TITLE}`}
+			description="Day by day itineraries from my trips. The actual route, where we stayed, what to book ahead, and what it cost."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="page-header">
+				<h1>Itineraries</h1>
+				<p class="intro">
+					The trips, stripped down to what you'd actually need to do them yourself. Where we
+					went each day, where we stayed, what needs booking ahead. Free to read, free to
+					print.
+				</p>
+			</div>
+
+			{
+				trips.length > 0 ? (
+					<ul class="trip-list">
+						{trips.map((t) => (
+							<li class="trip">
+								<a href={`/itineraries/${t.id}/`}>
+									{t.data.heroImage && (
+										<div class="trip-image">
+											<Image
+												src={t.data.heroImage}
+												alt={t.data.title}
+												width={640}
+												height={420}
+											/>
+										</div>
+									)}
+									<div class="trip-body">
+										<h2>{t.data.title}</h2>
+										{t.data.itinerary?.subtitle && (
+											<p class="trip-sub">{t.data.itinerary.subtitle}</p>
+										)}
+										<p class="trip-meta">
+											{t.data.itinerary?.days.length} days
+										</p>
+										<span class="trip-cta">View itinerary &rarr;</span>
+									</div>
+								</a>
+							</li>
+						))}
+					</ul>
+				) : (
+					<p class="empty">Itineraries are on the way.</p>
+				)
+			}
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 0 2em 6em;
+	}
+	.page-header {
+		padding: 4em 0 3em;
+		border-bottom: 1px solid rgb(var(--gray-light));
+		margin-bottom: 3em;
+		max-width: 640px;
+	}
+	.page-header h1 {
+		font-size: 3rem;
+		letter-spacing: -0.04em;
+		margin: 0 0 0.5em;
+		line-height: 1;
+	}
+	.intro {
+		font-size: 1.05rem;
+		color: rgb(var(--gray));
+		line-height: 1.7;
+		margin: 0;
+	}
+	.trip-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3rem;
+	}
+	.trip a {
+		display: block;
+		text-decoration: none;
+		color: rgb(var(--black));
+	}
+	.trip-image {
+		overflow: hidden;
+		border-radius: 6px;
+		margin-bottom: 1.1rem;
+		background: rgb(var(--gray-light));
+		aspect-ratio: 3 / 2;
+	}
+	.trip-image :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.5s ease;
+	}
+	.trip a:hover .trip-image :global(img) {
+		transform: scale(1.04);
+	}
+	.trip h2 {
+		font-size: 1.3rem;
+		line-height: 1.25;
+		margin: 0 0 0.4em;
+		transition: color 0.15s ease;
+	}
+	.trip a:hover h2 {
+		color: var(--accent);
+	}
+	.trip-sub {
+		font-size: 0.95rem;
+		color: rgb(var(--gray));
+		line-height: 1.6;
+		margin: 0 0 0.5em;
+	}
+	.trip-meta {
+		font-size: 0.78rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+		margin: 0 0 0.9em;
+	}
+	.trip-cta {
+		font-size: 0.85rem;
+		font-weight: 600;
+		border-bottom: 2px solid var(--accent);
+		padding-bottom: 1px;
+	}
+	.empty {
+		color: rgb(var(--gray));
+	}
+	@media (max-width: 768px) {
+		main {
+			padding: 0 1.25em 4em;
+		}
+		.page-header {
+			padding: 2.5em 0 2em;
+			margin-bottom: 2.5em;
+		}
+		.page-header h1 {
+			font-size: 2.25rem;
+		}
+		.trip-list {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+		}
+	}
+</style>
