@@ -52,6 +52,11 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 					margin-left: 0;
 					transform: none;
 				}
+				/* The full desktop size (3.052em) is wider than a phone column for
+				   long single words, which then split mid-word. */
+				.title h1 {
+					font-size: 2.4em;
+				}
 			}
 			.prose :global(.wide img),
 			.prose :global(.wide video) {
