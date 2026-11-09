@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# raw Africa camera dumps (3GB), only the exports in src/assets/africa/ get committed
+src/assets/africa/Kili/
+src/assets/africa/MasaiMara/

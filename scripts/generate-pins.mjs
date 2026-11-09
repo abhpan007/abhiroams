@@ -40,7 +40,8 @@ const skipped = [];
 for (const file of files) {
 	const slug = file.replace(/\.mdx?$/, '');
 	const source = await readFile(path.join(BLOG_DIR, file), 'utf8');
-	const hero = frontmatterValue(source, 'heroImage');
+	// A post can set pinImage when its hero doesn't survive the crop to 2:3.
+	const hero = frontmatterValue(source, 'pinImage') ?? frontmatterValue(source, 'heroImage');
 
 	if (!hero) {
 		skipped.push(`${slug} (no heroImage)`);
